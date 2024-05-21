@@ -61,4 +61,10 @@ def repopulate(population, parents, children_count):
         population[children_count + 1] = cross(p2, p1)
         children_count += 2
                
-            
+ 
+def get_parent_index(parents, exclude_index):
+    size = len(parents)
+    while True:
+       index = randint(0, size - 1)
+       if exclude_index is None or exclude_index != index:
+           return index            
