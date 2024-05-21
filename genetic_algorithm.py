@@ -99,3 +99,9 @@ def print_population(population):
     for chromo in population:
         i += 1
         print(str(i) + ". " + str(chromo.rating) + ": " + chromo.genes.decode())
+        
+
+gene_pool = bytearray(b'abcdefghijklmnopqrstuvwxyz')
+final_chromo = bytearray(b'the selection was successful')
+chromo_size = len(final_chromo)
+population_size = 30
