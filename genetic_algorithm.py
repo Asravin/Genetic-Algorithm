@@ -105,3 +105,17 @@ gene_pool = bytearray(b'abcdefghijklmnopqrstuvwxyz')
 final_chromo = bytearray(b'the selection was successful')
 chromo_size = len(final_chromo)
 population_size = 30
+
+
+survivors = [None] * (population_size // 2)
+population = create_population(population_size, chromo_size, gene_pool)
+iteration_count = 0
+
+while(True):
+    iteration_count += 1
+    calc_rating(population, final_chromo)
+    sort_population(population)
+    print("***" + str(iteration_count) + "***")
+    print_population(population)
+    if population[0].rating == 0:
+        break
