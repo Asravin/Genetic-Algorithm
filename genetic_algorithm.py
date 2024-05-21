@@ -15,15 +15,15 @@ class Chromosome:
             rand_pos = randint(0, gene_pool_range)
             self.genes[i] = gene_pool(rand_pos)
             
-    
-    def create_population(pop_size, chromo_size, genes):
+
+def create_population(pop_size, chromo_size, genes):
         population = [None] * pop_size
         for i in range(pop_size):
-            population[i] = Chromosome(chromo_size, genes)
+            population[i] = Chromosome(chromo_size, gene_pool)
         return population
     
     
-    def calc_rating(population, final_chromo):
+def calc_rating(population, final_chromo):
         for chromo in population:
             chromo.rating = chromo.size
             for i in range(chromo.size):
@@ -31,7 +31,7 @@ class Chromosome:
                     chromo.rating -= 1
     
     
-    def sort_population(population):
+def sort_population(population):
         size = len(population)
         repeat = True
         while repeat:
@@ -42,7 +42,23 @@ class Chromosome:
                     population[i] = population[i + 1]
                     population[i + 1] = bubble
                     repeat = True
+    
+    
+def select(population, survivors):
+    size = len(survivors)
+    for i in range(size):
+        survivors[i] = population[i]
+        
                 
-            
+def repopulate(population, parents, children_count):
+    pop_size = len(population)
+    while children_count < pop_size:
+        p1_pos = get_parent_index(parents, None)
+        p2_pos = get_parent_index(parents, p1_pos)
+        p1 = parents[p1_pos]
+        p2 = parents[p2_pos]
+        population[children_count] = cross(p1, p2)
+        population[children_count + 1] = cross(p2, p1)
+        children_count += 2
                
             
