@@ -92,4 +92,10 @@ def mutate(population, chromo_count, gene_count, gene_pool):
             gene = gene_pool[gene_pos]
             gene_pos = randint(0, chromo.size - 1)
             chromo.genes[gene_pos] = gene
-        
+
+
+def print_population(population):
+    i = 0
+    for chromo in population:
+        i += 1
+        print(str(i) + ". " + str(chromo.rating) + ": " + chromo.genes.decode())
