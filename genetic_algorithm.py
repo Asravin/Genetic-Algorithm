@@ -79,3 +79,17 @@ def cross(chromo1, chromo2):
     for i in range(point, size):
         child.genes[i] = chromo2.genes[i]
     return child
+
+
+def mutate(population, chromo_count, gene_count, gene_pool):
+    pop_size = len(population)
+    gene_pool_size = len(gene_pool)
+    for i in range(chromo_count):
+        chromo_pos = randint(0, pop_size - 1)
+        chromo = population[chromo_pos]
+        for j in range(gene_count):
+            gene_pos = randint(0, gene_pool_size - 1)
+            gene = gene_pool[gene_pos]
+            gene_pos = randint(0, chromo.size - 1)
+            chromo.genes[gene_pos] = gene
+        
