@@ -21,5 +21,12 @@ class Chromosome:
         for i in range(pop_size):
             population[i] = Chromosome(chromo_size, genes)
         return population
+    
+    def calc_rating(population, final_chromo):
+        for chromo in population:
+            chromo.rating = chromo.size
+            for i in range(chromo.size):
+                if chromo.genes[i] == final_chromo:
+                    chromo.rating -= 1
             
             
