@@ -13,7 +13,7 @@ class Chromosome:
         gene_pool_range = len(gene_pool) - 1
         for i in range(self.size):
             rand_pos = randint(0, gene_pool_range)
-            self.genes[i] = gene_pool(rand_pos)
+            self.genes[i] = gene_pool[rand_pos]
             
 
 def create_population(pop_size, chromo_size, genes):
@@ -27,7 +27,7 @@ def calc_rating(population, final_chromo):
         for chromo in population:
             chromo.rating = chromo.size
             for i in range(chromo.size):
-                if chromo.genes[i] == final_chromo:
+                if chromo.genes[i] == final_chromo[i]:
                     chromo.rating -= 1
     
     
@@ -37,7 +37,7 @@ def sort_population(population):
         while repeat:
             repeat = False
             for i in range(0, size - 1):
-                bubble =population[i]
+                bubble = population[i]
                 if(bubble.rating > population[i + 1].rating):
                     population[i] = population[i + 1]
                     population[i + 1] = bubble
@@ -98,13 +98,13 @@ def print_population(population):
     i = 0
     for chromo in population:
         i += 1
-        print(str(i) + ". " + str(chromo.rating) + ": " + chromo.genes.decode())
+        print(str(i) + '. ' + str(chromo.rating) + ': ' + chromo.genes.decode())
         
 
-gene_pool = bytearray(b'abcdefghijklmnopqrstuvwxyz')
+gene_pool = bytearray(b'abcdefghijklmnopqrstuvwxyz ') 
 final_chromo = bytearray(b'the selection was successful')
 chromo_size = len(final_chromo)
-population_size = 30
+population_size = 20
 
 
 survivors = [None] * (population_size // 2)
@@ -115,7 +115,13 @@ while(True):
     iteration_count += 1
     calc_rating(population, final_chromo)
     sort_population(population)
-    print("***" + str(iteration_count) + "***")
+    print('*** ' + str(iteration_count) + ' ***')
     print_population(population)
     if population[0].rating == 0:
         break
+    if iteration_count == 20:break
+    select(population, survivors)
+    repopulate(population, survivors, population_size // 2)
+    mutate(population, 10, 1, gene_pool)
+    
+
