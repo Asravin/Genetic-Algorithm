@@ -67,4 +67,15 @@ def get_parent_index(parents, exclude_index):
     while True:
        index = randint(0, size - 1)
        if exclude_index is None or exclude_index != index:
-           return index            
+           return index
+       
+
+def cross(chromo1, chromo2):
+    size = chromo1.size
+    point = randint(0, size - 1)     
+    child = Chromosome(size, None)    
+    for i in range(point):
+        child.genes[i] = chromo1.genes[i]
+    for i in range(point, size):
+        child.genes[i] = chromo2.genes[i]
+    return child
