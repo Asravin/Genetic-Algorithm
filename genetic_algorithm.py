@@ -15,3 +15,11 @@ class Chromosome:
             rand_pos = randint(0, gene_pool_range)
             self.genes[i] = gene_pool(rand_pos)
             
+    
+    def create_population(pop_size, chromo_size, genes):
+        population = [None] * pop_size
+        for i in range(pop_size):
+            population[i] = Chromosome(chromo_size, genes)
+        return population
+            
+            
